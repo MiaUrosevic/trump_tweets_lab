@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-'''
-# Lab: Analyzing Trump Tweets
 
+# Lab: Analyzing Trump Tweets
+'''
 In this lab, you will analyze all tweets sent by president Trump from 2009-2018.
 You will get practice
 1. loading datasets stored in JSON files,
@@ -156,3 +156,62 @@ There are two extra credit opportunities for this lab, worth one point each.
     For example, you could plot: what time of day does Trump tweet most often? or what state does Trump tweet from most often?
     If you add this to your repo you will get +1 point.
 '''
+
+import os
+import json
+from collections import Counter
+import matplotlib.pyplot as plt
+
+DATA_FOLDER = "trump_tweet_data_archive"
+
+# Keywords to track
+KEYWORDS = ["trump", "obama", "mexico", "russia", "fake news"]
+EXTRA = ["wall", "daca", "media"]
+ALL_KEYWORDS = KEYWORDS + EXTRA
+
+all_tweets = []
+
+# Loop over all condensed JSON files
+for filename in os.listdir(DATA_FOLDER):
+    if filename.startswith("condensed_") and filename.endswith(".json"):
+        path = os.path.join(DATA_FOLDER, filename)
+        with open(path, "r", encoding="utf-8") as f:
+            tweets = json.load(f)
+            all_tweets.extend(tweets)
+
+print(f"Total tweets loaded: {len(all_tweets)}")
+
+
+counts = Counter()
+
+for tweet in all_tweets:
+    text = tweet.get("text", "").lower()
+    for kw in ALL_KEYWORDS:
+        if kw.lower() in text:
+            counts[kw.lower()] += 1
+
+print("Keyword counts:", counts)
+
+
+total = len(all_tweets)
+percentages = {k: (counts[k.lower()] / total * 100) for k in ALL_KEYWORDS}
+
+
+print("\n| phrase            | percent of tweets |")
+print("| ----------------- | ---------------- |")
+for kw in sorted(ALL_KEYWORDS):
+    pct = percentages[kw]
+    print(f"| {kw:>17} | {pct:5.2f} |")  # cleaner formatting
+
+
+plt.figure(figsize=(10,6))
+plt.bar([k.capitalize() for k in ALL_KEYWORDS],
+        [percentages[k] for k in ALL_KEYWORDS],
+        color='skyblue')
+plt.ylabel("Percent of Tweets (%)")
+plt.title("Trump Tweet Keyword Analysis (Condensed)")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("trump_tweets_condensed_plot.png")
+plt.show()
+
