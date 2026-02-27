@@ -4,14 +4,14 @@ This table and bar charts show the frequency of key words in Donald Trump's twee
 
 | phrase            | percent of tweets |
 | ----------------- | ---------------- |
-|              daca |  0.17 |
-|         fake news |  0.92 |
-|             media |  2.06 |
-|            mexico |  0.55 |
-|             obama |  7.47 |
-|            russia |  1.13 |
+|              daca | 00.17 |
+|         fake news | 00.92 |
+|             media | 02.06 |
+|            mexico | 00.55 |
+|             obama | 07.47 |
+|            russia | 01.13 |
 |             trump | 38.35 |
-|              wall |  0.91 |
+|              wall | 00.91 |
 ## Keyword Frequency Plot
 
 ![Condensed Tweets Bar Chart](trump_tweets_condensed_plot.png)
