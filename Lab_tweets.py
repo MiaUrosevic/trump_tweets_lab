@@ -220,4 +220,4 @@ print("\n| phrase            | percent of tweets |")
 print("| ----------------- | ---------------- |")
 for kw in DISPLAY_ORDER:
     pct = percentages[kw]
-    print(f"| {kw:>17} | {pct:5.2f} |")
+    print(f"| {kw:>17} | {pct:05.2f} |")
