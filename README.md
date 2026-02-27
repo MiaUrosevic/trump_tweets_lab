@@ -1,5 +1,6 @@
 # trump_tweets_lab
 ## Tweet Keyword Analysis
+This table and bar charts show the frequency of key words in Donald Trump's tweets from 2009–2018.
 
 | phrase      | percent of tweets |
 | ----------- | ---------------- |
