@@ -157,21 +157,33 @@ There are two extra credit opportunities for this lab, worth one point each.
     If you add this to your repo you will get +1 point.
 '''
 
+#!/usr/bin/python3
+
 import os
 import json
 from collections import Counter
 import matplotlib.pyplot as plt
 
+# ---------------------------
+# Configuration
+# ---------------------------
+
 DATA_FOLDER = "trump_tweet_data_archive"
 
-# Keywords to track
+# Keywords to track (original + extra)
 KEYWORDS = ["trump", "obama", "mexico", "russia", "fake news"]
 EXTRA = ["wall", "daca", "media"]
 ALL_KEYWORDS = KEYWORDS + EXTRA
 
+# Order to display in table/plot
+DISPLAY_ORDER = ["daca", "fake news", "media", "mexico", "obama", "russia", "trump", "wall"]
+
+# ---------------------------
+# Load Tweets
+# ---------------------------
+
 all_tweets = []
 
-# Loop over all condensed JSON files
 for filename in os.listdir(DATA_FOLDER):
     if filename.startswith("condensed_") and filename.endswith(".json"):
         path = os.path.join(DATA_FOLDER, filename)
@@ -181,6 +193,9 @@ for filename in os.listdir(DATA_FOLDER):
 
 print(f"Total tweets loaded: {len(all_tweets)}")
 
+# ---------------------------
+# Count Keywords
+# ---------------------------
 
 counts = Counter()
 
@@ -192,21 +207,27 @@ for tweet in all_tweets:
 
 print("Keyword counts:", counts)
 
-
+# Calculate percentages
 total = len(all_tweets)
 percentages = {k: (counts[k.lower()] / total * 100) for k in ALL_KEYWORDS}
 
+# ---------------------------
+# Print Markdown Table
+# ---------------------------
 
 print("\n| phrase            | percent of tweets |")
 print("| ----------------- | ---------------- |")
-for kw in sorted(ALL_KEYWORDS):
+for kw in DISPLAY_ORDER:
     pct = percentages[kw]
-    print(f"| {kw:>17} | {pct:5.2f} |")  # cleaner formatting
+    print(f"| {kw:>17} | {pct:5.2f} |")
 
+# ---------------------------
+# Plot Bar Graph
+# ---------------------------
 
 plt.figure(figsize=(10,6))
-plt.bar([k.capitalize() for k in ALL_KEYWORDS],
-        [percentages[k] for k in ALL_KEYWORDS],
+plt.bar([k.capitalize() for k in DISPLAY_ORDER],
+        [percentages[k] for k in DISPLAY_ORDER],
         color='skyblue')
 plt.ylabel("Percent of Tweets (%)")
 plt.title("Trump Tweet Keyword Analysis (Condensed)")
@@ -214,4 +235,3 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig("trump_tweets_condensed_plot.png")
 plt.show()
-
