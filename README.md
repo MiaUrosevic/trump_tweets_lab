@@ -15,3 +15,4 @@
 ## Keyword Frequency Plot
 
 ![Trump Tweets Keyword Analysis](trump_tweets_plot.png)
+
