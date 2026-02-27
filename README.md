@@ -14,5 +14,5 @@
 
 ## Keyword Frequency Plot
 
-![Master Tweets Bar Chart](trump_tweets_plot.png)
+![Condensed Tweets Bar Chart](trump_tweets_condensed_plot.png)
 
