@@ -28,6 +28,8 @@ This table shows keyword frequency using the full updated Trump Archive dataset.
 ## Keyword Frequency Plot
 
 ![Condensed Tweets Bar Chart](trump_tweets_condensed_plot.png)
+
+This graph shows keyword frequency using the full updated Trump Archive dataset.
 ![Latest Dataset Keyword Plot](latest_tweets_keyword_percentages.png)
 
 
