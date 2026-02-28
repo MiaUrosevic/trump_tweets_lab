@@ -159,6 +159,7 @@ There are two extra credit opportunities for this lab, worth one point each.
 
 #!/usr/bin/python3
 
+from datetime import datetime
 import os
 import json
 from collections import Counter
@@ -169,6 +170,7 @@ import matplotlib.pyplot as plt
 # ---------------------------
 
 DATA_FOLDER = "latest_data"
+# DATA_FOLDER = "trump_tweet_data_archive"
 
 # Keywords to track (original + extra)
 KEYWORDS = ["trump", "obama", "mexico", "russia", "fake news"]
@@ -200,13 +202,24 @@ if len(all_tweets) == 0:
 # ---------------------------
 # Count Keywords
 # ---------------------------
-
+time_freq = {}
 counts = Counter()
 for tweet in all_tweets:
     text = tweet.get("text", "").lower()
     for kw in ALL_KEYWORDS:
         if kw.lower() in text:
             counts[kw.lower()] += 1
+    if 'created_at' in tweet:
+        raw_time = tweet['created_at']
+        hour = raw_time[11:13]
+
+        if hour in time_freq:
+            time_freq[hour] += 1
+        else:
+            time_freq[hour] = 1
+sorted_time_freq = dict(sorted(time_freq.items(), key=lambda item: item[0]))
+print("sorted_time_freq:", sorted_time_freq) 
+
 
 print("Keyword counts:", counts)
 
