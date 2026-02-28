@@ -12,7 +12,23 @@ This table and bar charts show the frequency of key words in Donald Trump's twee
 |            russia | 01.13 |
 |             trump | 38.35 |
 |              wall | 00.91 |
+
+This table shows keyword frequency using the full updated Trump Archive dataset.
+| phrase            | percent of tweets |
+| ----------------- | ---------------- |
+|              daca | 00.15 |
+|         fake news | 01.66 |
+|             media | 02.74 |
+|            mexico | 00.62 |
+|             obama | 05.51 |
+|            russia | 01.32 |
+|             trump | 32.45 |
+|              wall | 01.08 |
+
 ## Keyword Frequency Plot
 
 ![Condensed Tweets Bar Chart](trump_tweets_condensed_plot.png)
+![Latest Dataset Keyword Plot](latest_tweets_plot.png)
+
+
 

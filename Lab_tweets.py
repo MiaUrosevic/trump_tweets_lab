@@ -162,12 +162,13 @@ There are two extra credit opportunities for this lab, worth one point each.
 import os
 import json
 from collections import Counter
+import matplotlib.pyplot as plt
 
 # ---------------------------
 # Configuration
 # ---------------------------
 
-DATA_FOLDER = "trump_tweet_data_archive"
+DATA_FOLDER = "latest_data"
 
 # Keywords to track (original + extra)
 KEYWORDS = ["trump", "obama", "mexico", "russia", "fake news"]
@@ -184,13 +185,17 @@ DISPLAY_ORDER = ["daca", "fake news", "media", "mexico", "obama", "russia", "tru
 all_tweets = []
 
 for filename in os.listdir(DATA_FOLDER):
-    if filename.startswith("condensed_") and filename.endswith(".json"):
+    if filename.endswith(".json"):
         path = os.path.join(DATA_FOLDER, filename)
         with open(path, "r", encoding="utf-8") as f:
             tweets = json.load(f)
             all_tweets.extend(tweets)
 
 print(f"Total tweets loaded: {len(all_tweets)}")
+
+if len(all_tweets) == 0:
+    print("No tweets loaded. Check your folder.")
+    exit()
 
 # ---------------------------
 # Count Keywords
@@ -221,3 +226,18 @@ print("| ----------------- | ---------------- |")
 for kw in DISPLAY_ORDER:
     pct = percentages[kw]
     print(f"| {kw:>17} | {pct:05.2f} |")
+
+plt.figure(figsize=(10,6))
+plt.bar([kw.capitalize() for kw in DISPLAY_ORDER],
+        [percentages[kw] for kw in DISPLAY_ORDER],
+        color='skyblue')
+
+plt.xlabel('Keyword')
+plt.ylabel('Percentage of Tweets')
+plt.title('Percentage of Trump Tweets Containing Each Keyword')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('latest_tweets_keyword_percentages.png')
+plt.show()
+
+
